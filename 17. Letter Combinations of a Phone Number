@@ -1,0 +1,28 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        if (digits.isEmpty()) return new ArrayList<>();
+        HashMap<Integer,String> map = new HashMap<>();
+        map.put(2,"abc");map.put(3,"def");map.put(4,"ghi");
+        map.put(5,"jkl");map.put(6,"mno");map.put(7,"pqrs");
+        map.put(8,"tuv");map.put(9,"wxyz");
+        ArrayList<String> a = new ArrayList<>();
+        for (int i = 0; i < digits.length() ; i++) {
+            a.add(map.get(Integer.parseInt("" + digits.charAt(i))));
+        }
+        ArrayList<String> b = new ArrayList<>();
+        Com(a,"",0,b);
+        return b;
+    }
+
+    public void Com(ArrayList<String> a,String q,int Curr_Ind,ArrayList<String> res){
+        if (Curr_Ind == a.size()){
+            res.add(q);
+            return;
+        }
+        int j = 0;
+        while (j != a.get(Curr_Ind).length()){
+            Com(a,q + a.get(Curr_Ind).charAt(j),Curr_Ind+1,res);
+            j++;
+        }
+    }
+}
